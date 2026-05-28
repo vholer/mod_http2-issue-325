@@ -9,7 +9,7 @@ docker build --tag poc . && docker run --ulimit nofile=65535:65535 -p 8080:80 po
 2. Watch number of fds across httpd processes:
 
 ```
-while true; do ( for X in $(pidof httpd); do ls /proc/$X/fd; done ) | wc -l; sleep 1; done
+while true; do ( for X in $(pidof httpd apache2); do ls /proc/$X/fd; done ) | wc -l; sleep 1; done
 ```
 
 3. Run curl to download slowly big file:

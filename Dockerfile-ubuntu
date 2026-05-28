@@ -1,0 +1,8 @@
+FROM docker.io/ubuntu:26.04
+RUN apt-get update && apt-get install -fy apache2
+COPY apache2.conf /etc/apache2/apache2.conf
+RUN mkdir -p /var/www/localhost/htdocs
+RUN apache2 -t
+RUN dd if=/dev/zero of=/var/www/localhost/htdocs/big bs=1M count=1000
+CMD ["/usr/sbin/apache2", "-DFOREGROUND"]
+EXPOSE 80
